@@ -1,7 +1,7 @@
 #!/bin/bash
 #Creator: David Parra-Sandoval
 #Date: 12/24/2023
-#Last Modified: 12/24/20023
+#Last Modified: 12/24/2023
 clear
 
 #checking requirements
