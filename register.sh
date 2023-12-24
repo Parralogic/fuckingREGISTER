@@ -239,7 +239,12 @@ product6
 ;;
 
 TOTAL|7)
+if [[ ! -e YourRECEIPT ]]; then
+echo "No RECEIPT!"
+else
 TOTAL
+fi
+
 ;;
 esac
 done
