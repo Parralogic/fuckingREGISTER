@@ -1,11 +1,16 @@
 #!/bin/bash
 #Creator: David Parra-Sandoval
 #Date: 12/24/2023
-#Last Modified: 12/24/2023
+#Last Modified: 12/31/2023
 clear
 
 #checking requirements
 for APP in bc; do
+if [[ -d RECEIPTSforTHEday ]]; then
+echo "The directory for the RECEIPTs exist; GOOD!"
+else
+mkdir RECEIPTSforTHEday
+fi
 command -vv bc &> /dev/null
 if [[ $? = 0 ]]; then
 echo -e  "\e[92m$APP installed\e[00m"
@@ -14,6 +19,11 @@ exit 1
 fi
 done
 
+CUSTOMERSNAME () {
+
+read -p "Name of Customer for the RECEIPT: " NAMEOFCUSTOMER
+
+}
 product1 () {
 echo "product1 HOW MANY?"
 select HOWMANY in 1 2 3 4 5 6 CUSTOM; do
@@ -25,9 +35,10 @@ PRICE=2.50
 TOTALPRICE=$(bc <<< "$PRICE * $HOWMANY")
 echo "[$PRICE * $HOWMANY]"
 echo $TOTALPRICE
-echo product1 $TOTALPRICE >> YourRECEIPT
+echo "product1 $PRICE * $HOWMANY = $TOTALPRICE" >> YourRECEIPT
 break
 done
+
 }
 
 product2 () {
@@ -41,7 +52,7 @@ PRICE=5.25
 TOTALPRICE=$(bc <<< "$PRICE * $HOWMANY")
 echo "[$PRICE * $HOWMANY]"
 echo $TOTALPRICE
-echo product2 $TOTALPRICE >> YourRECEIPT
+echo "product2 $PRICE * $HOWMANY = $TOTALPRICE" >> YourRECEIPT
 break
 done
 
@@ -58,7 +69,7 @@ PRICE=10.99
 TOTALPRICE=$(bc <<< "$PRICE * $HOWMANY")
 echo "[$PRICE * $HOWMANY]"
 echo $TOTALPRICE
-echo product3 $TOTALPRICE >> YourRECEIPT
+echo "product3 $PRICE * $HOWMANY = $TOTALPRICE" >> YourRECEIPT
 break
 done
 
@@ -75,7 +86,7 @@ PRICE=6.99
 TOTALPRICE=$(bc <<< "$PRICE * $HOWMANY")
 echo "[$PRICE * $HOWMANY]"
 echo $TOTALPRICE
-echo product4 $TOTALPRICE >> YourRECEIPT
+echo "product4 $PRICE * $HOWMANY = $TOTALPRICE" >> YourRECEIPT
 break
 done
 
@@ -92,7 +103,7 @@ PRICE=1.25
 TOTALPRICE=$(bc <<< "$PRICE * $HOWMANY")
 echo "[$PRICE * $HOWMANY]"
 echo $TOTALPRICE
-echo product5 $TOTALPRICE >> YourRECEIPT
+echo "product5 $PRICE * $HOWMANY = $TOTALPRICE" >> YourRECEIPT
 break
 done
 
@@ -109,7 +120,7 @@ PRICE=3.99
 TOTALPRICE=$(bc <<< "$PRICE * $HOWMANY")
 echo "[$PRICE * $HOWMANY]"
 echo $TOTALPRICE
-echo product6 $TOTALPRICE >> YourRECEIPT
+echo "product6 $PRICE * $HOWMANY = $TOTALPRICE" >> YourRECEIPT
 break
 done
 
@@ -123,38 +134,53 @@ TOTALNUMBEROFPRODUCTS=$(cat YourRECEIPT | grep YourRECEIPT | cut -d " " -f 1)
 
 if [[ $TOTALNUMBEROFPRODUCTS = 1 ]]; then
 ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
-TAX=.0837
+TAX=.084
 WITH_TAX=$(bc <<< "$ONE_PRODUCT * $TAX")
 echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ONE_PRODUCT + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
+CUSTOMERSNAME
 read -p "PRESS Enter will Delete the RECEIPT"
+DATE=$(date)
+cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
+unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 2 ]]; then
 ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
 TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 2)
 ADD_TWO_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2")
-TAX=.0837
+TAX=.084
 WITH_TAX=$(bc <<< "$ADD_TWO_PRODUCTS * $TAX")
 echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_TWO_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
+CUSTOMERSNAME
 read -p "PRESS Enter will Delete the RECEIPT"
+DATE=$(date)
+cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
+unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 3 ]]; then
 ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
 TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 2)
 THREE_PRODUCT3=$(cat YourRECEIPT | head -3 | tail -2 | tail -1 | cut -d " " -f 2)
 ADD_THREE_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2 + $THREE_PRODUCT3")
-TAX=.0837
+TAX=.084
 WITH_TAX=$(bc <<< "$ADD_THREE_PRODUCTS * $TAX")
 echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_THREE_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
+CUSTOMERSNAME
 read -p "PRESS Enter will Delete the RECEIPT"
+DATE=$(date)
+cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
+unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 4 ]]; then
 ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
@@ -162,13 +188,18 @@ TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 2)
 THREE_PRODUCT3=$(cat YourRECEIPT | tail -3 | head -1 | cut -d " " -f 2)
 FOUR_PRODUCT4=$(cat YourRECEIPT | tail -2 | head -1 | cut -d " " -f 2)
 ADD_FOUR_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2 + $THREE_PRODUCT3 + $FOUR_PRODUCT4")
-TAX=.0837
+TAX=.084
 WITH_TAX=$(bc <<< "$ADD_FOUR_PRODUCTS * $TAX")
 echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_FOUR_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
+CUSTOMERSNAME
 read -p "PRESS Enter will Delete the RECEIPT"
+DATE=$(date)
+cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
+unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 5 ]]; then
 ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
@@ -177,13 +208,18 @@ THREE_PRODUCT3=$(cat YourRECEIPT | tail -4 | head -1 | cut -d " " -f 2)
 FOUR_PRODUCT4=$(cat YourRECEIPT | tail -3 | head -1 | cut -d " " -f 2)
 FIVE_PRODUCT5=$(cat YourRECEIPT | tail -2 | head -1 | cut -d " " -f 2)
 ADD_FIVE_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2 + $THREE_PRODUCT3 + $FOUR_PRODUCT4 + $FIVE_PRODUCT5")
-TAX=.0837
+TAX=.084
 WITH_TAX=$(bc <<< "$ADD_FIVE_PRODUCTS * $TAX")
 echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_FIVE_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
+CUSTOMERSNAME
 read -p "PRESS Enter will Delete the RECEIPT"
+DATE=$(date)
+cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
+unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 6 ]]; then
 ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
@@ -193,13 +229,18 @@ FOUR_PRODUCT4=$(cat YourRECEIPT | head -4 | tail -2 | head -2 | tail -1 | cut -d
 FIVE_PRODUCT5=$(cat YourRECEIPT | tail -3 | head -2 | head -1 | cut -d " " -f 2)
 SIX_PRODUCT6=$(cat YourRECEIPT | tail -3 | head -2 | tail -1 | cut -d " " -f 2)
 ADD_SIX_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2 + $THREE_PRODUCT3 + $FOUR_PRODUCT4 + $FIVE_PRODUCT5 + $SIX_PRODUCT6")
-TAX=.0837
+TAX=.084
 WITH_TAX=$(bc <<< "$ADD_FIVE_PRODUCTS * $TAX")
 echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_FIVE_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
+CUSTOMERSNAME
 read -p "PRESS Enter will Delete the RECEIPT"
+DATE=$(date)
+cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
+unset DATE
 fi
 }
 ##THANKS#https://unix.stackexchange.com/questions/80099/bc-automatic-full-precision-multiplication#######
@@ -219,7 +260,6 @@ product1
 
 product|2)
 product2
-
 ;;
 
 product|3)
