@@ -133,7 +133,7 @@ cat YourRECEIPT
 TOTALNUMBEROFPRODUCTS=$(cat YourRECEIPT | grep YourRECEIPT | cut -d " " -f 1)
 
 if [[ $TOTALNUMBEROFPRODUCTS = 1 ]]; then
-ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
+ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 6)
 TAX=.084
 WITH_TAX=$(bc <<< "$ONE_PRODUCT * $TAX")
 echo "Fucking TAX is $WITH_TAX"
@@ -148,8 +148,8 @@ rm YourRECEIPT
 unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 2 ]]; then
-ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
-TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 2)
+ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 6)
+TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 6)
 ADD_TWO_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2")
 TAX=.084
 WITH_TAX=$(bc <<< "$ADD_TWO_PRODUCTS * $TAX")
@@ -165,9 +165,9 @@ rm YourRECEIPT
 unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 3 ]]; then
-ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
-TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 2)
-THREE_PRODUCT3=$(cat YourRECEIPT | head -3 | tail -2 | tail -1 | cut -d " " -f 2)
+ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 6)
+TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 6)
+THREE_PRODUCT3=$(cat YourRECEIPT | head -3 | tail -2 | tail -1 | cut -d " " -f 6)
 ADD_THREE_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2 + $THREE_PRODUCT3")
 TAX=.084
 WITH_TAX=$(bc <<< "$ADD_THREE_PRODUCTS * $TAX")
@@ -183,10 +183,10 @@ rm YourRECEIPT
 unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 4 ]]; then
-ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
-TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 2)
-THREE_PRODUCT3=$(cat YourRECEIPT | tail -3 | head -1 | cut -d " " -f 2)
-FOUR_PRODUCT4=$(cat YourRECEIPT | tail -2 | head -1 | cut -d " " -f 2)
+ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 6)
+TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 6)
+THREE_PRODUCT3=$(cat YourRECEIPT | tail -3 | head -1 | cut -d " " -f 6)
+FOUR_PRODUCT4=$(cat YourRECEIPT | tail -2 | head -1 | cut -d " " -f 6)
 ADD_FOUR_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2 + $THREE_PRODUCT3 + $FOUR_PRODUCT4")
 TAX=.084
 WITH_TAX=$(bc <<< "$ADD_FOUR_PRODUCTS * $TAX")
@@ -202,11 +202,11 @@ rm YourRECEIPT
 unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 5 ]]; then
-ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
-TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 2)
-THREE_PRODUCT3=$(cat YourRECEIPT | tail -4 | head -1 | cut -d " " -f 2)
-FOUR_PRODUCT4=$(cat YourRECEIPT | tail -3 | head -1 | cut -d " " -f 2)
-FIVE_PRODUCT5=$(cat YourRECEIPT | tail -2 | head -1 | cut -d " " -f 2)
+ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 6)
+TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 6)
+THREE_PRODUCT3=$(cat YourRECEIPT | tail -4 | head -1 | cut -d " " -f 6)
+FOUR_PRODUCT4=$(cat YourRECEIPT | tail -3 | head -1 | cut -d " " -f 6)
+FIVE_PRODUCT5=$(cat YourRECEIPT | tail -2 | head -1 | cut -d " " -f 6)
 ADD_FIVE_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2 + $THREE_PRODUCT3 + $FOUR_PRODUCT4 + $FIVE_PRODUCT5")
 TAX=.084
 WITH_TAX=$(bc <<< "$ADD_FIVE_PRODUCTS * $TAX")
@@ -222,12 +222,12 @@ rm YourRECEIPT
 unset DATE
 ################################################################
 elif [[ $TOTALNUMBEROFPRODUCTS = 6 ]]; then
-ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 2)
-TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 2)
-THREE_PRODUCT3=$(cat YourRECEIPT | head -3 | tail -2 | tail -1 | cut -d " " -f 2)
-FOUR_PRODUCT4=$(cat YourRECEIPT | head -4 | tail -2 | head -2 | tail -1 | cut -d " " -f 2)
-FIVE_PRODUCT5=$(cat YourRECEIPT | tail -3 | head -2 | head -1 | cut -d " " -f 2)
-SIX_PRODUCT6=$(cat YourRECEIPT | tail -3 | head -2 | tail -1 | cut -d " " -f 2)
+ONE_PRODUCT=$(cat YourRECEIPT | head -1 | cut -d " " -f 6)
+TWO_PRODUCT2=$(cat YourRECEIPT | head -2 | tail -1 | cut -d " " -f 6)
+THREE_PRODUCT3=$(cat YourRECEIPT | head -3 | tail -2 | tail -1 | cut -d " " -f 6)
+FOUR_PRODUCT4=$(cat YourRECEIPT | head -4 | tail -2 | head -2 | tail -1 | cut -d " " -f 6)
+FIVE_PRODUCT5=$(cat YourRECEIPT | tail -3 | head -2 | head -1 | cut -d " " -f 6)
+SIX_PRODUCT6=$(cat YourRECEIPT | tail -3 | head -2 | tail -1 | cut -d " " -f 6)
 ADD_SIX_PRODUCTS=$(bc <<< "$ONE_PRODUCT + $TWO_PRODUCT2 + $THREE_PRODUCT3 + $FOUR_PRODUCT4 + $FIVE_PRODUCT5 + $SIX_PRODUCT6")
 TAX=.084
 WITH_TAX=$(bc <<< "$ADD_FIVE_PRODUCTS * $TAX")
