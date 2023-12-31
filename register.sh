@@ -140,10 +140,10 @@ echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ONE_PRODUCT + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
 CUSTOMERSNAME
-read -p "PRESS Enter will Delete the RECEIPT"
+read -p "PRESS Enter For NEW TRANSACTION, Temporary RECEIPT will be DELETED"
 DATE=$(date)
 cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
-echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE tax\$$WITH_TAX TOTAL\$$ADD_TAX >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
 unset DATE
 ################################################################
@@ -157,10 +157,10 @@ echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_TWO_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
 CUSTOMERSNAME
-read -p "PRESS Enter will Delete the RECEIPT"
+read -p "PRESS Enter For NEW TRANSACTION, Temporary RECEIPT will be DELETED"
 DATE=$(date)
 cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
-echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE tax\$$WITH_TAX TOTAL\$$ADD_TAX >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
 unset DATE
 ################################################################
@@ -175,10 +175,10 @@ echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_THREE_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
 CUSTOMERSNAME
-read -p "PRESS Enter will Delete the RECEIPT"
+read -p "PRESS Enter For NEW TRANSACTION, Temporary RECEIPT will be DELETED"
 DATE=$(date)
 cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
-echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE tax\$$WITH_TAX TOTAL\$$ADD_TAX >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
 unset DATE
 ################################################################
@@ -194,10 +194,10 @@ echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_FOUR_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
 CUSTOMERSNAME
-read -p "PRESS Enter will Delete the RECEIPT"
+read -p "PRESS Enter For NEW TRANSACTION, Temporary RECEIPT will be DELETED"
 DATE=$(date)
 cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
-echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE tax\$$WITH_TAX TOTAL\$$ADD_TAX >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
 unset DATE
 ################################################################
@@ -214,10 +214,10 @@ echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_FIVE_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
 CUSTOMERSNAME
-read -p "PRESS Enter will Delete the RECEIPT"
+read -p "PRESS Enter For NEW TRANSACTION, Temporary RECEIPT will be DELETED"
 DATE=$(date)
 cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
-echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE tax\$$WITH_TAX TOTAL\$$ADD_TAX >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
 unset DATE
 ################################################################
@@ -235,10 +235,10 @@ echo "Fucking TAX is $WITH_TAX"
 ADD_TAX=$(bc <<< "$ADD_FIVE_PRODUCTS + $WITH_TAX")
 echo "Fucking TOTAL is \$$ADD_TAX"
 CUSTOMERSNAME
-read -p "PRESS Enter will Delete the RECEIPT"
+read -p "PRESS Enter For NEW TRANSACTION, Temporary RECEIPT will be DELETED"
 DATE=$(date)
 cp YourRECEIPT RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
-echo $DATE >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
+echo $DATE tax\$$WITH_TAX TOTAL\$$ADD_TAX >> RECEIPTSforTHEday/RECEIPT_$NAMEOFCUSTOMER
 rm YourRECEIPT
 unset DATE
 fi
@@ -250,7 +250,7 @@ echo -e "\t####The Fucking Register!####"
 echo -e "\t1)product1   4)product4"
 echo -e "\t2)product2   5)product5"
 echo -e "\t3)product3   6)product6"
-echo -e "7)Total"
+echo -e "7)\e[92mTotal\e[00m 8)Show Fucking RECEIPTs 9)\e[31mEXIT!\e[00m"
 read -p "#? " PRODUCT
 clear
 case $PRODUCT in
@@ -284,6 +284,23 @@ echo "No RECEIPT!"
 else
 TOTAL
 fi
+
+;;
+
+SHOWRECEIPTS|8)
+select RECEIPT in $(ls RECEIPTSforTHEday/); do
+cat RECEIPTSforTHEday/$RECEIPT
+break
+done
+
+;;
+
+EXIT|9)
+#Here you can modify what will the script do when
+#you exit out of it. Like backup the RECEIPTSforTHEday folder
+#You can use also my file-organizer script to back it up.
+#
+break
 
 ;;
 esac
